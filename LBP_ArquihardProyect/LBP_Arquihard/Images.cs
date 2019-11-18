@@ -103,11 +103,52 @@ namespace LBP_Arquihard.Model
             return sum ;
         }
 
-        public void splitImage(int width, int height)
+        public void SplitImage(int width, int height)
         {
 
             int d1 = bitMapLbp.Width / width;
             int d2 = bitMapLbp.Height / height;
+            List<Dictionary<int, int>> listHistograms = new List<Dictionary<int, int>>();
+
+            int numDic = d1 * d2;
+            int z = 0;
+            while (z < numDic)
+            {
+                Dictionary<int, int> histogram = new Dictionary<int, int>();
+
+                listHistograms.Add(histogram);
+                z++;
+            }
+
+            int aux = -2;
+
+            for (int j = 0; j < bitMap.Height; j++)
+            {
+                if (j % d2 == 0)
+                {
+                    aux++;
+                }
+
+                for (int i = 0; i < bitMap.Width; i++)
+                {
+                    if (i % d1 == 0)
+                    {
+                        aux++;
+                    }
+                    Dictionary<int, int> histogram = listHistograms.ElementAt(aux);
+
+                    if (histogram.ContainsKey(bitMapLbp.GetPixel(i, j).R))
+                    {
+                        histogram[bitMapLbp.GetPixel(i, j).R]++;
+                    }
+                    else
+                    {
+                        histogram[bitMapLbp.GetPixel(i, j).R] = 1;
+                    }
+                }
+
+            }
+            
 
         }
     }

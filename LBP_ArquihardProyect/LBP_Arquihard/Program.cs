@@ -19,6 +19,8 @@ namespace LBP_Arquihard
 
             images.lbp(2,8);
             Console.WriteLine("YA");
+            images.SplitImage(2, 2);
+            Console.WriteLine("YA2");
             Console.ReadLine();
 
         }
