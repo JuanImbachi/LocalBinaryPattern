@@ -17,10 +17,8 @@ namespace LBP_Arquihard
 
             Images images = new Images();
 
-            foreach(Point point in images.neighbours(3, 2, 2, 16))
-            {
-                Console.WriteLine(point.X + " - " + point.Y);
-            }
+            images.lbp(2,8);
+
             Console.ReadLine();
         }
             

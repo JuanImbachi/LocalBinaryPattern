@@ -10,12 +10,36 @@ namespace LBP_Arquihard.Model
 {
     class Images
     {
+        private Bitmap bitMap;
+        private Bitmap bitMapLbp;
         public Images()
         {
 
         }
-        public void GrayScale(){
-            String path = "F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/11-1.jpeg";
+
+        public void lbp(int radius, int numNeighbours)
+        {
+            String path = "F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file.png";
+            Image SelectedPic = Image.FromFile(path);
+            Bitmap bitmap = (Bitmap)SelectedPic;
+
+            bitMap = bitmap;
+            bitMapLbp = bitmap;
+            for (int y = radius; y < bitMap.Height - radius; y++)
+            {
+                for (int x = radius; x < bitMap.Width -radius; x++)
+                {
+                    int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours));
+                    Console.WriteLine(value);
+                    bitMapLbp.SetPixel(x,y,Color.FromArgb(value,value,value));
+                }
+            }
+
+            bitmap.Save("F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file2.png", ImageFormat.Png);
+
+        }
+
+        public void GrayScale(String path){
             Image SelectedPic = Image.FromFile(path);
             Bitmap bitmap = (Bitmap)SelectedPic;
             Color pixelColor;
@@ -40,7 +64,6 @@ namespace LBP_Arquihard.Model
             }
 
             bitmap.Save("F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file.png", ImageFormat.Png);
-                
         }
 
         public List<Point> neighbours(int x, int y, int radius, int numNeighbours)
@@ -50,15 +73,9 @@ namespace LBP_Arquihard.Model
             for (int i = 0; i < numNeighbours; i++)
             {
                 double t = (2 * Math.PI * i) / numNeighbours;
-                Console.WriteLine("Vecino #" + i);
-                Console.WriteLine("  X =>  " + (x + radius * Math.Cos(t)));
-                Console.WriteLine("  Y =>  " + (y - radius * Math.Sin(t)));
-
+                
                 double neighbourX = Math.Round(x + radius * Math.Cos(t), MidpointRounding.AwayFromZero);
                 double neighbourY = Math.Round(y - radius * Math.Sin(t), MidpointRounding.AwayFromZero);
-
-                Console.WriteLine("  newX =>  " + neighbourX);
-                Console.WriteLine("  newY =>  " + neighbourY);
 
                 Point nPoint = new Point((int)neighbourX, (int)neighbourY);
 
@@ -66,6 +83,25 @@ namespace LBP_Arquihard.Model
             }
 
             return neighbours;
+        }
+
+        public int middlepointValue(int x, int y, List<Point> neighbours)
+        {
+            int sum = 0;
+            int i = 0;
+            foreach (Point point in neighbours)
+            {
+                int aux = (bitMap.GetPixel(x, y).R.CompareTo(bitMap.GetPixel(point.X, point.Y).R) >= 0)? 1: 0 ;
+
+                if (aux == 1)
+                {
+                    sum += (int)Math.Pow(2, i);
+                }
+
+                i++;
+            }
+
+            return sum ;
         }
     }
 }
