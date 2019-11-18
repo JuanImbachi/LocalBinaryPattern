@@ -30,7 +30,6 @@ namespace LBP_Arquihard.Model
                 for (int x = radius; x < bitMap.Width -radius; x++)
                 {
                     int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours));
-                    Console.WriteLine(value);
                     bitMapLbp.SetPixel(x,y,Color.FromArgb(value,value,value));
                 }
             }
@@ -102,6 +101,14 @@ namespace LBP_Arquihard.Model
             }
 
             return sum ;
+        }
+
+        public void splitImage(int width, int height)
+        {
+
+            int d1 = bitMapLbp.Width / width;
+            int d2 = bitMapLbp.Height / height;
+
         }
     }
 }

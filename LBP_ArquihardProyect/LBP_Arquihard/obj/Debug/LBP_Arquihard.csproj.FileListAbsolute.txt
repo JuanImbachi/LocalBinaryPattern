@@ -10,3 +10,9 @@ F:\icesi\visualStudio\workspace\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP
 F:\icesi\visualStudio\workspace\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
 F:\icesi\visualStudio\workspace\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
 F:\icesi\visualStudio\workspace\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe.config
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.pdb
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
+F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
