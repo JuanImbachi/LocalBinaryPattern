@@ -103,7 +103,7 @@ namespace LBP_Arquihard.Model
             return sum ;
         }
 
-        public void SplitImage(int width, int height)
+        public List<Dictionary<int, int>> SplitImage(int width, int height)
         {
 
             int d1 = bitMapLbp.Width / width;
@@ -148,8 +148,8 @@ namespace LBP_Arquihard.Model
                 }
 
             }
-            
 
+            return listHistograms;
         }
     }
 }
