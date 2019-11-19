@@ -51,5 +51,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\ColoredDataset\" />
+    <Folder Include="Resources\GrayDataset\" />
+    <Folder Include="Resources\LBPDataset\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

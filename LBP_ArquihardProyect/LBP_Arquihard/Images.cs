@@ -17,29 +17,30 @@ namespace LBP_Arquihard.Model
 
         }
 
-        public void lbp(int radius, int numNeighbours)
+        public void lbp(int radius, int numNeighbours, string path, int id)
         {
-            String path = "F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file.png";
-            Image SelectedPic = Image.FromFile(path);
-            Bitmap bitmap = (Bitmap)SelectedPic;
+            Console.WriteLine(id);
+            Image SelectedPic = Image.FromFile(path + id + ".jpeg");
+            bitMap = (Bitmap)SelectedPic;
+            bitMapLbp = new Bitmap(SelectedPic.Width, SelectedPic.Height, PixelFormat.Format32bppRgb);
 
-            bitMap = bitmap;
-            bitMapLbp = bitmap;
             for (int y = radius; y < bitMap.Height - radius; y++)
             {
-                for (int x = radius; x < bitMap.Width -radius; x++)
+                for (int x = radius; x < bitMap.Width - radius; x++)
                 {
-                    int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours));
-                    bitMapLbp.SetPixel(x,y,Color.FromArgb(value,value,value));
+                    int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours)) % 255;
+                    Color color = Color.FromArgb(value, value, value);
+                    bitMapLbp.SetPixel(x, y, color);
                 }
             }
 
-            bitmap.Save("F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file2.png", ImageFormat.Png);
+            bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
 
         }
 
-        public void GrayScale(String path){
-            Image SelectedPic = Image.FromFile(path);
+        public void GrayScale(String path, int id)
+        {
+            Image SelectedPic = Image.FromFile(path + id + ".jpeg");
             Bitmap bitmap = (Bitmap)SelectedPic;
             Color pixelColor;
             int[] nilaiLBP = new int[256];
@@ -62,7 +63,7 @@ namespace LBP_Arquihard.Model
                 }
             }
 
-            bitmap.Save("F:/Kuliah/Semester 6/Pengolahan Citra/DatasetLBP/file.png", ImageFormat.Png);
+            bitmap.Save(Program.GRAY_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
         }
 
         public List<Point> neighbours(int x, int y, int radius, int numNeighbours)

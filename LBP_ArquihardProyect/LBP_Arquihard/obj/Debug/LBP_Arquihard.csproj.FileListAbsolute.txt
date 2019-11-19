@@ -16,3 +16,9 @@ F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP
 F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
 F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
 F:\icesi\git\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe.config
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.pdb
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
+C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
