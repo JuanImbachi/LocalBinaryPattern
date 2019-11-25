@@ -17,12 +17,16 @@ namespace LBP_Arquihard
         public const String LPB_DATA_PATH = "C:/Users/juand/OneDrive/Documentos/GitHub/LocalBinaryPattern/LBP_ArquihardProyect/LBP_Arquihard/Resources/LBPDataset/";
         static void Main(string[] args)
         {
-
             Images images = new Images();
-            for(int i = 1; i <= 8; i++)
+            for (int n = 1; n <= 4; n++)
             {
-                images.GrayScale(COLORED_DATA_PATH, i);
-                images.lbp(2, 8, GRAY_DATA_PATH, i);
+                for (int i = 1; i <= 4; i++)
+                {
+                    for (int j = 1; j <= 2; j++)
+                    {
+                        images.GrayScale(COLORED_DATA_PATH + "TNivel" + n + "/" , i + "-" + j);
+                    }
+                }
             }
 
         }

@@ -17,7 +17,7 @@ namespace LBP_Arquihard.Model
 
         }
 
-        public void lbp(int radius, int numNeighbours, string path, int id)
+        public void lbp(int radius, int numNeighbours, string path, string id)
         {
             Console.WriteLine(id);
             Image SelectedPic = Image.FromFile(path + id + ".jpeg");
@@ -34,13 +34,13 @@ namespace LBP_Arquihard.Model
                 }
             }
 
-            bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
+            bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpg", ImageFormat.Jpeg);
 
         }
 
-        public void GrayScale(String path, int id)
+        public void GrayScale(String path, string id)
         {
-            Image SelectedPic = Image.FromFile(path + id + ".jpeg");
+            Image SelectedPic = Image.FromFile(path + id + ".jpg");
             Bitmap bitmap = (Bitmap)SelectedPic;
             Color pixelColor;
             int[] nilaiLBP = new int[256];
@@ -63,7 +63,7 @@ namespace LBP_Arquihard.Model
                 }
             }
 
-            bitmap.Save(Program.GRAY_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
+            bitmap.Save(Program.GRAY_DATA_PATH + id + ".jpg", ImageFormat.Jpeg);
         }
 
         public List<Point> neighbours(int x, int y, int radius, int numNeighbours)
