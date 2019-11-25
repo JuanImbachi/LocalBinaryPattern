@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -17,12 +18,19 @@ namespace LBP_Arquihard.Model
 
         }
 
-        public void lbp(int radius, int numNeighbours, string path, string id)
+        public double lbp(int radius, int numNeighbours, string path, string id)
         {
-            Console.WriteLine(id);
+            Stopwatch sw = new Stopwatch();
+
+            sw.Restart();
+            sw.Start();
+
             Image SelectedPic = Image.FromFile(path + id + ".jpeg");
             bitMap = (Bitmap)SelectedPic;
             bitMapLbp = new Bitmap(SelectedPic.Width, SelectedPic.Height, PixelFormat.Format32bppRgb);
+
+            sw.Restart();
+            sw.Start();
 
             for (int y = radius; y < bitMap.Height - radius; y++)
             {
@@ -33,9 +41,15 @@ namespace LBP_Arquihard.Model
                     bitMapLbp.SetPixel(x, y, color);
                 }
             }
+            sw.Stop();
 
-            bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpg", ImageFormat.Jpeg);
+            bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
 
+            
+
+            long tiempo = (long)(sw.Elapsed.TotalMilliseconds);
+
+            return tiempo;
         }
 
         public void GrayScale(String path, string id)
@@ -63,7 +77,7 @@ namespace LBP_Arquihard.Model
                 }
             }
 
-            bitmap.Save(Program.GRAY_DATA_PATH + id + ".jpg", ImageFormat.Jpeg);
+            bitmap.Save(Program.GRAY_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
         }
 
         public List<Point> neighbours(int x, int y, int radius, int numNeighbours)

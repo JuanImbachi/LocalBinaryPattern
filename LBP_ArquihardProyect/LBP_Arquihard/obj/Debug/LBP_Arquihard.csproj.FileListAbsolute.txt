@@ -22,3 +22,9 @@ C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyec
 C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
 C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
 C:\Users\juand\OneDrive\Documentos\GitHub\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.csprojAssemblyReference.cache
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.exe
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\obj\Debug\LBP_Arquihard.pdb
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe.config
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.exe
+C:\Users\LENOVO\Source\Repos\LocalBinaryPattern\LBP_ArquihardProyect\LBP_Arquihard\bin\Debug\LBP_Arquihard.pdb
