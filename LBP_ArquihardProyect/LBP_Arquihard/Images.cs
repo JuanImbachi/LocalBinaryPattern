@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,14 +32,16 @@ namespace LBP_Arquihard.Model
 
             sw.Restart();
             sw.Start();
-
-            for (int y = radius; y < bitMap.Height - radius; y++)
-            {
-                for (int x = radius; x < bitMap.Width - radius; x++)
+            for (int x = radius; x < bitMap.Width - radius; x++){
+                for (int y = radius; y < bitMap.Height - radius; y++)
                 {
-                    int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours)) % 255;
-                    Color color = Color.FromArgb(value, value, value);
-                    bitMapLbp.SetPixel(x, y, color);
+                  // for (int x = radius; x < bitMap.Width - radius; x++)
+                  // {
+                        int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours)) % 255;
+
+                        Color color = Color.FromArgb(value, value, value);
+                        bitMapLbp.SetPixel(x, y, color);
+                   // }
                 }
             }
             sw.Stop();
@@ -165,6 +168,12 @@ namespace LBP_Arquihard.Model
             }
 
             return listHistograms;
+        }
+   
+        public double distancia()
+        {
+           // vect
+            return 0.0;
         }
     }
 }
