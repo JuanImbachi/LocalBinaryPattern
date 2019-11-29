@@ -19,40 +19,47 @@ namespace LBP_Arquihard.Model
 
         }
 
-        public double lbp(int radius, int numNeighbours, string path, string id)
+        public Bitmap GetBitmapLBP()
+        {
+            return bitMapLbp;
+        }
+
+        public int[,] lbp(int radius, int numNeighbours, string path, string id)
         {
             Stopwatch sw = new Stopwatch();
-
-            sw.Restart();
-            sw.Start();
-
+ 
             Image SelectedPic = Image.FromFile(path + id + ".jpeg");
             bitMap = (Bitmap)SelectedPic;
             bitMapLbp = new Bitmap(SelectedPic.Width, SelectedPic.Height, PixelFormat.Format32bppRgb);
 
             sw.Restart();
             sw.Start();
-            for (int x = radius; x < bitMap.Width - radius; x++){
+          //  for (int x = radius; x < bitMap.Width - radius; x++){
                 for (int y = radius; y < bitMap.Height - radius; y++)
                 {
-                  // for (int x = radius; x < bitMap.Width - radius; x++)
-                  // {
-                        int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours)) % 255;
+                   for (int x = radius; x < bitMap.Width - radius; x++)
+                  { 
+                        int value = middlepointValue(x, y, neighbours(x, y, radius, numNeighbours));
 
-                        Color color = Color.FromArgb(value, value, value);
+                        if (value > 255) {
+                        value = value / 256;
+                        }
+                        Color color = Color.FromArgb(value,value,value);
                         bitMapLbp.SetPixel(x, y, color);
-                   // }
+                   }
                 }
-            }
+          //  }
             sw.Stop();
+
 
             bitMapLbp.Save(Program.LPB_DATA_PATH + id + ".jpeg", ImageFormat.Jpeg);
 
             
 
-            long tiempo = (long)(sw.Elapsed.TotalMilliseconds);
+            //long tiempo = (long)(sw.Elapsed.TotalMilliseconds);
 
-            return tiempo;
+             return HistogramToMatrix(SplitImage());
+           
         }
 
         public void GrayScale(String path, string id)
@@ -87,17 +94,26 @@ namespace LBP_Arquihard.Model
         {
             List<Point> neighbours = new List<Point>();
 
+            
             for (int i = 0; i < numNeighbours; i++)
             {
                 double t = (2 * Math.PI * i) / numNeighbours;
-                
+
                 double neighbourX = Math.Round(x + radius * Math.Cos(t), MidpointRounding.AwayFromZero);
                 double neighbourY = Math.Round(y - radius * Math.Sin(t), MidpointRounding.AwayFromZero);
 
                 Point nPoint = new Point((int)neighbourX, (int)neighbourY);
-
                 neighbours.Add(nPoint);
+                /*
+                 double aux = Math.PI;
+                 aux = numNeighbours;
+
+                 aux = x;
+                 aux = radius;
+                 aux = radius;*/
             }
+
+
 
             return neighbours;
         }
@@ -106,29 +122,91 @@ namespace LBP_Arquihard.Model
         {
             int sum = 0;
             int i = 0;
+
+            
             foreach (Point point in neighbours)
             {
-                int aux = (bitMap.GetPixel(x, y).R.CompareTo(bitMap.GetPixel(point.X, point.Y).R) >= 0)? 1: 0 ;
+                
+                 int aux = (bitMap.GetPixel(x, y).R.CompareTo(bitMap.GetPixel(point.X, point.Y).R) >= 0)? 1: 0 ;
 
-                if (aux == 1)
-                {
-                    sum += (int)Math.Pow(2, i);
-                }
+                 if (aux == 1)
+                 {
+                     sum += (int)Math.Pow(2, i);
+                 }
 
-                i++;
+                 i++;
+                /*
+                                int aux = bitMap.GetPixel(x, y).R;
+                aux = bitMap.GetPixel(x, y).R;
+
+                sum = x;
+                i++;*/
+                
             }
+
+
 
             return sum ;
         }
 
-        public List<Dictionary<int, int>> SplitImage(int width, int height)
+       public double Distance(int[,] matrizA,int[,] matrizB)
         {
+            int row = matrizA.GetLength(0);
+            int col = matrizA.GetLength(1);
 
-            int d1 = bitMapLbp.Width / width;
-            int d2 = bitMapLbp.Height / height;
+            double chi = 0;
+            
+            for (int i = 0; i < row;i++)
+            {
+                for (int j = 0; j < col; j++) 
+                {
+                    int suma  =  matrizA[i, j] + matrizB[i, j];
+                    int resta = matrizA[i, j] - matrizB[i, j];
+
+                    
+                    if (resta == 0)
+                    {
+                        chi += 0;
+                    }
+                    else
+                    {
+                        chi += Math.Pow(resta, 2) / suma;
+                    }
+                    
+                }
+            }
+            return chi;
+        }
+
+       public int[,] HistogramToMatrix(List<Dictionary<int, int>> imag)
+        {
+            int[,] matrix = new int[imag.Count, 256];
+            int numDiccionario = 0;
+
+            foreach (Dictionary<int, int>  dic in imag) 
+            {
+                for (int j = 0; j <= 255; j++)
+                {
+                    if (dic.ContainsKey(byte.Parse(j + "")))
+                    {
+                        matrix[numDiccionario, j] = dic[byte.Parse(j+"")];
+                    }
+                    else
+                    {
+                        matrix[numDiccionario, j] = 0;
+                    }
+                    
+                }
+                
+                numDiccionario++;
+            }
+            return matrix;
+        }
+        public List<Dictionary<int, int>> SplitImage()
+        {
             List<Dictionary<int, int>> listHistograms = new List<Dictionary<int, int>>();
 
-            int numDic = d1 * d2;
+            int numDic = 4;
             int z = 0;
             while (z < numDic)
             {
@@ -138,38 +216,63 @@ namespace LBP_Arquihard.Model
                 z++;
             }
 
-            int aux = -2;
-
-            for (int j = 0; j < bitMap.Height; j++)
+            for (int y = 0; y < bitMapLbp.Height; y++)
             {
-                if (j % d2 == 0)
+                for (int x = 0; x < bitMapLbp.Width; x++)
                 {
-                    aux++;
+                    if (x <= bitMapLbp.Height/2 && y <= bitMapLbp.Width/2)
+                    {
+                        Dictionary<int, int> histogram = listHistograms.ElementAt(0);
+                        if (histogram.ContainsKey(bitMapLbp.GetPixel(x, y).R))
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R]++;
+                        }
+                        else
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R] = 1;
+                        }
+                    }
+                    else if (x > bitMapLbp.Height / 2 && y <= bitMapLbp.Width / 2)
+                    {
+                        Dictionary<int, int> histogram = listHistograms.ElementAt(1);
+                        if (histogram.ContainsKey(bitMapLbp.GetPixel(x, y).R))
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R]++;
+                        }
+                        else
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R] = 1;
+                        }
+                    }
+                    else if (x <= bitMapLbp.Height / 2 && y > bitMapLbp.Width / 2)
+                    {
+                        Dictionary<int, int> histogram = listHistograms.ElementAt(2);
+                        if (histogram.ContainsKey(bitMapLbp.GetPixel(x, y).R))
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R]++;
+                        }
+                        else
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R] = 1;
+                        }
+                    }
+                    else if (x > bitMapLbp.Height/2 && y > bitMapLbp.Width/2) 
+                    {
+                        Dictionary<int, int> histogram = listHistograms.ElementAt(3);
+                        if (histogram.ContainsKey(bitMapLbp.GetPixel(x, y).R))
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R]++;
+                        }
+                        else
+                        {
+                            histogram[bitMapLbp.GetPixel(x, y).R] = 1;
+                        }
+                    }
                 }
-
-                for (int i = 0; i < bitMap.Width; i++)
-                {
-                    if (i % d1 == 0)
-                    {
-                        aux++;
-                    }
-                    Dictionary<int, int> histogram = listHistograms.ElementAt(aux);
-
-                    if (histogram.ContainsKey(bitMapLbp.GetPixel(i, j).R))
-                    {
-                        histogram[bitMapLbp.GetPixel(i, j).R]++;
-                    }
-                    else
-                    {
-                        histogram[bitMapLbp.GetPixel(i, j).R] = 1;
-                    }
-                }
-
             }
-
             return listHistograms;
         }
-   
+        
         public double distancia()
         {
            // vect
